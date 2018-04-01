@@ -14,11 +14,10 @@ install:
   - php coveralls.phar --version
 
 before_script:
-  - composer install
   - mkdir -p build/logs
 script:
  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
- - vendor/bin/behat
+# - vendor/bin/behat
 
 
 after_success:
