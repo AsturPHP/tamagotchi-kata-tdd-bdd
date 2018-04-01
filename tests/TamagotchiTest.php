@@ -118,4 +118,132 @@ class TamagotchiTest extends TestCase
 
     }
 
+
+    public function testFullnessIsNotNegative()
+    {
+        $tamagotchi = $this->getAEmptyTamagotchi();
+
+        $tamagotchi->poop();
+
+
+
+        $this->assertEquals(0,$tamagotchi->getFullness());
+    }
+
+    private function getAEmptyTamagotchi()
+    {
+        return new Tamagotchi(0,0,0,0);
+    }
+
+    public function testHungrinessIsNotNegative()
+    {
+        $tamagotchi = $this->getAEmptyTamagotchi();
+
+        $tamagotchi->feed();
+
+        $this->assertEquals(0,$tamagotchi->getHungriness());
+    }
+
+    public function testTirednessIsNotNegative()
+    {
+        $tamagotchi = $this->getAEmptyTamagotchi();
+
+        $tamagotchi->toBed();
+
+        $this->assertEquals(0,$tamagotchi->getTiredness());
+    }
+
+    public function testHappinessIsNotNegative()
+    {
+        $tamagotchi = $this->getAEmptyTamagotchi();
+
+        $tamagotchi->timePasses();
+
+        $this->assertEquals(0,$tamagotchi->getHappiness());
+
+    }
+
+    public function testHappinessAndTirednessIsNotGreaterThan100()
+    {
+        $tamagotchi = $this->getAFullTamagotchi();
+
+        $tamagotchi->play();
+
+        $this->assertEquals(100,$tamagotchi->getHappiness());
+        $this->assertEquals(100,$tamagotchi->getTiredness());
+    }
+
+
+    public function getAFullTamagotchi()
+    {
+        return new Tamagotchi(100,100,100,100);
+    }
+
+    public function testFullnessIsNotGreaterThan100()
+    {
+        $tamagotchi = $this->getAFullTamagotchi();
+
+        $tamagotchi->feed();
+
+        $this->assertEquals(100,$tamagotchi->getFullness());
+    }
+
+    public function testHungrinessAndTirednessIsNotGreaterThan100()
+    {
+        $tamagotchi = $this->getAFullTamagotchi();
+
+        $tamagotchi->timePasses();
+
+        $this->assertEquals(100,$tamagotchi->getHungriness());
+        $this->assertEquals(100,$tamagotchi->getTiredness());
+
+    }
+
+
+    /********************/
+    /* Mutation testing */
+    /********************/
+
+
+    public function testMutationOneZeroIntegerInSafeDecreased()
+    {
+        $tamagotchi = new Tamagotchi(1,1,1,1);
+
+        $this->assertTamagotchiFeed($tamagotchi);
+
+    }
+
+
+    public function testMutationIncrementIntegerInSafeDecreased()
+    {
+        $tamagotchi = new Tamagotchi(2,2,2,2);
+
+        $this->assertTamagotchiFeed($tamagotchi);
+
+    }
+
+    public function testDecrementIntegerInSafeIncreased()
+    {
+        $tamagotchi = new Tamagotchi(99,99,99,99);
+
+        $this->assertTamagotchiFeed($tamagotchi);
+
+    }
+
+    /**
+     * @param $tamagotchi
+     */
+    public function assertTamagotchiFeed($tamagotchi): void
+    {
+        $expectedValues = $this->getTamagotchiValues($tamagotchi);
+
+        $tamagotchi->feed();
+
+        $expectedValues['hungriness']--;
+        $expectedValues['fullness']++;
+
+        $this->assertEquals($expectedValues, $this->getTamagotchiValues($tamagotchi));
+    }
+
+
 }

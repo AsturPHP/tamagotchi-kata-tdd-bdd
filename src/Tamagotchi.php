@@ -13,7 +13,7 @@ class Tamagotchi
     /** @var int */
     private $tiredness;
 
-    public function __construct($hungriness=0, $fullness=0, $happiness=0, $tiredness=0)
+    public function __construct($hungriness = 0, $fullness = 0, $happiness = 0, $tiredness = 0)
     {
         $this->hungriness = $hungriness;
         $this->fullness = $fullness;
@@ -43,42 +43,51 @@ class Tamagotchi
     }
 
 
-
     public function play()
     {
-        $this->happiness++;
-        $this->tiredness++;
+        $this->safeIncreased('happiness');
+        $this->safeIncreased('tiredness');
 
     }
 
     public function feed()
     {
-        $this->hungriness--;
-        $this->fullness++;
+        $this->safeDecreased('hungriness');
+        $this->safeIncreased('fullness');
+
 
     }
 
     public function toBed()
     {
-        $this->tiredness--;
-
+        $this->safeDecreased('tiredness');
     }
 
 
     public function poop()
     {
-        $this->fullness--;
+        $this->safeDecreased('fullness');
     }
 
 
     public function timePasses()
     {
-        $this->tiredness++;
-        $this->hungriness++;
-        $this->happiness--;
+        $this->safeIncreased('tiredness');
+        $this->safeIncreased('hungriness');
+        $this->safeDecreased('happiness');
 
     }
 
+    private function safeDecreased($key)
+    {
+        $this->{$key} = $this->{$key} > 0  ? $this->{$key} - 1 : 0;
+    }
+
+    private function safeIncreased($key)
+    {
+        $this->{$key} = $this->{$key} < 100 ? $this->{$key} + 1 : 100;
+
+    }
 
 
 }
