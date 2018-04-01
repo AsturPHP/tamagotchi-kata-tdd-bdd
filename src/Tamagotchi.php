@@ -46,28 +46,36 @@ class Tamagotchi
 
     public function play()
     {
+        $this->happiness++;
+        $this->tiredness++;
 
     }
 
     public function feed()
     {
+        $this->hungriness--;
+        $this->fullness++;
 
     }
 
     public function toBed()
     {
+        $this->tiredness--;
 
     }
 
 
     public function poop()
     {
-
+        $this->fullness--;
     }
 
 
     public function timePasses()
     {
+        $this->tiredness++;
+        $this->hungriness++;
+        $this->happiness--;
 
     }
 
