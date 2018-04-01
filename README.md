@@ -4,6 +4,7 @@
 
 # tamagotchi-kata-tdd-bdd
 
-Skeleton for kata http://agilekatas.co.uk/katas/Tamagotchi-Kata using TDD(phpunit) and BDD(behat) for testing
+Solution for kata http://agilekatas.co.uk/katas/Tamagotchi-Kata using TDD(phpunit) and BDD(behat) for testing
 
 
+You can download the skeleton [here](https://github.com/Jonatanmdez/tamagotchi-kata-tdd-bdd/tree/v1-skeleton)
