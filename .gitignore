@@ -1,2 +1,5 @@
 vendor/
 .idea
+tmp
+infection-log.txt
+composer.lock
