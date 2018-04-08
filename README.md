@@ -7,3 +7,19 @@
 Skeleton for kata http://agilekatas.co.uk/katas/Tamagotchi-Kata using TDD(phpunit) and BDD(behat) for testing
 
 
+# How to install
+
+``` bash
+git clone https://github.com/AsturPHP/tamagotchi-kata-tdd-bdd
+composer update 
+vendor/bin/phpunit 
+```
+```
+And if all requirements are good the output of phpunit will be 
+
+.                                                                   1 / 1 (100%)
+
+Time: 48 ms, Memory: 4.00MB
+
+OK (1 test, 1 assertion)
+```
